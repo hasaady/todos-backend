@@ -23,7 +23,7 @@ This is the backend service for the Todos application. It provides API endpoints
    cd todos-backend
    docker-compose up --build
 
-### Access the application:
-The API will be available at http://localhost:5000
-The database will be running on localhost:1433
+2. Access the application:
+   The API will be available at http://localhost:5000
+   The database will be running on localhost:1433
 
