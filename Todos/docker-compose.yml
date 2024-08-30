@@ -1,8 +1,28 @@
-version: '3.4'
-
 services:
-  tasks:
-    image: ${DOCKER_REGISTRY-}tasks
+  todos.api:
+    image: ${DOCKER_REGISTRY-}todos
     build:
       context: .
-      dockerfile: Tasks/Dockerfile
+      dockerfile: Todos/Dockerfile
+    environment:
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    ports: 
+      - 8080:8080
+    depends_on:
+      todos.database:
+        condition: service_started
+
+  todos.database:
+      image: "postgres"
+      environment:
+        POSTGRES_PASSWORD: "NotSoVerySecret"
+      volumes:
+        - database.volume:/var/lib/postgresql
+      ports:
+        - "5432:5432"
+      networks: 
+        - default.network
+      restart: always
+
+volumes:
+  database.volume:

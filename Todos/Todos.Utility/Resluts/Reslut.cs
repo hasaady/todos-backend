@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Posts.Domain.Results
+namespace Domain.Results
 {
     public class Result(bool isSuccess, string errorMessage)
     {
