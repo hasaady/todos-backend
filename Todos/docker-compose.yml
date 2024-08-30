@@ -9,20 +9,20 @@ services:
     ports: 
       - 8080:8080
     depends_on:
-      todos.database:
+      database:
         condition: service_started
-
-  todos.database:
-      image: "postgres"
-      environment:
-        POSTGRES_PASSWORD: "NotSoVerySecret"
-      volumes:
-        - database.volume:/var/lib/postgresql
-      ports:
-        - "5432:5432"
-      networks: 
-        - default.network
-      restart: always
+  database:
+    image: "mcr.microsoft.com/azure-sql-edge"
+    environment:
+      MSSQL_SA_PASSWORD: "Aa@123456789"
+      ACCEPT_EULA: "1"
+    volumes:
+     - database.volume:/var/opt/mssql
+    ports:
+      - "1434:1433"
+    networks: 
+      - default.network
+    restart: always
 
 volumes:
   database.volume:
