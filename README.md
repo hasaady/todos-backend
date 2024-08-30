@@ -5,7 +5,6 @@ This is the backend service for the Todos application. It provides API endpoints
 ## Features
 
 - Create, read, update, and delete to-do items
-- User authentication and authorization
 - Logging and error handling
 
 ## Getting Started
