@@ -15,15 +15,14 @@ namespace Todos.Application.Features.Todo.Commands.AddTodo
 
         public async Task<AddTodoResponse> Handle(AddTodoCommand request, CancellationToken cancellationToken)
         {
-            TodoEntity task = new TodoEntity
+            TodoEntity todo = new TodoEntity
             {
                 Name = request.Name,
                 Description = request.Description,
                 UserId = request.UsertId
-
             };
 
-            await _repo.AddTaskAsync(task);
+            await _repo.AddTodoAsync(todo);
 
             return new AddTodoResponse();
         }

@@ -31,7 +31,7 @@ namespace Todos.Api.Controllers
         {
             command.UsertId = 1;
 
-            var response = _mediator.Send(command);
+            var response = await _mediator.Send(command);
 
             return Ok(response);
         }

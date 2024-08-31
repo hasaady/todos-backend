@@ -1,41 +1,49 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using System.Reflection;
 
 namespace Utility.Providers
 {
     public interface ISQLQueryProvider
     {
-        public Task<string> GetQuery(string filePath);
+        public Task<string> GetQueryAsync(string fileName, Type typeInTargetNameSpace);
     }
 
-    public class SQLQueryProvider: ISQLQueryProvider
+    public class SQLQueryProvider : ISQLQueryProvider
     {
         private readonly IMemoryCache _cache;
-        //private readonly Assembly _assembly;
 
         public SQLQueryProvider(IMemoryCache cache)
         {
             _cache = cache;
-           // _assembly = Assembly.GetExecutingAssembly();
         }
 
-        public async Task<string> GetQuery(string fileName)
+        public async Task<string> GetQueryAsync(string fileName, Type typeInTargetNamespace)
         {
+            string resourceName = $"{typeInTargetNamespace.Namespace}.SQL.{fileName}";
 
-            string fullPath = Path.GetFullPath(fileName);
-
-            if (_cache.TryGetValue(fullPath, out string query))
+            if (_cache.TryGetValue(resourceName, out string query))
             {
                 return query;
             }
+            
+            // If not cached, load the resource from the assembly
+            using (Stream resourceStream = typeInTargetNamespace.Assembly.GetManifestResourceStream(resourceName))
+            {
+                if (resourceStream == null)
+                {
+                    throw new FileNotFoundException($"Resource '{resourceName}' not found.");
+                }
 
-            query = await File.ReadAllTextAsync(fullPath);
+                using (StreamReader reader = new StreamReader(resourceStream))
+                {
+                    query = await reader.ReadToEndAsync();
+                }
+            }
 
-            var cacheEntryOprtions = new MemoryCacheEntryOptions
+            _cache.Set(fileName, query, new MemoryCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(30)
-            };
-
-            _cache.Set(fileName, query, cacheEntryOprtions);
+            });
 
             return query;
         }

@@ -11,15 +11,15 @@
 
   <ItemGroup>
     <None Remove="Infrastrucutre\Migrations\Scripts\Script001-InitialDatabase.sql" />
-    <None Remove="Infrastrucutre\Respositories\SqlQueries\Add_tas.sql" />
+    <None Remove="Infrastrucutre\Respositories\SQL\Add_task.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Infrastrucutre\Migrations\Scripts\Script001-InitialDatabase.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastrucutre\Respositories\SqlQueries\Add_tas.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <EmbeddedResource Include="Infrastrucutre\Respositories\SQL\add_task.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

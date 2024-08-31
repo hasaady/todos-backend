@@ -18,12 +18,13 @@ namespace Todos.Infrastrucutre.Respositories
             _sqlProvider = sqlProvider;
         }
 
-        public async Task AddTaskAsync(TodoEntity task)
+        public async Task AddTodoAsync(TodoEntity todo)
         {
             using (IDbConnection connection = _dbContext.CreateConnection())
             {
-                var query = await _sqlProvider.GetQuery("Add_task.sql");
-                await connection.ExecuteAsync(query, task);
+                var query = await _sqlProvider.GetQueryAsync("add_task.sql", GetType());
+
+                await connection.QueryFirstOrDefaultAsync(query, todo);
             }
         }
     }
