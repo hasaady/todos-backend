@@ -2,10 +2,13 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Todos.Api.Controllers.Base;
 using Todos.Application.Features.Todo.Commands.AddTodo;
+using Todos.Application.Features.Todo.Commands.DeleteTodo;
+using Todos.Application.Features.Todo.Commands.UpdateTodo;
+using Todos.Application.Features.Todo.Queries.GetTodos;
 
 namespace Todos.Api.Controllers
 {
-    [Route("todo")]
+    [Route("todos")]
     public class TodosController : ApiBaseController
     {
 
@@ -20,11 +23,13 @@ namespace Todos.Api.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult> Get()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        [HttpGet]
+        public async Task<ActionResult> Get()
+        {
+            var response = await _mediator.Send(new GetTodosCommand());
+
+            return Ok(response);
+        }
 
         [HttpPost]
         public async Task<ActionResult<AddTodoResponse>> Post(AddTodoCommand command)
@@ -36,17 +41,21 @@ namespace Todos.Api.Controllers
             return Ok(response);
         }
 
-        //[HttpPut]
-        //public async Task<ActionResult> Put()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        [HttpPut]
+        public async Task<ActionResult> Put(UpdateTodoCommand command)
+        {
+            var response = await _mediator.Send(command);
 
-        //[HttpDelete]
-        //public async Task<ActionResult> Delete()
-        //{
-        //    throw new NotImplementedException();
-        //}
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(DeleteTodoCommand command)
+        {
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
 
     }
 }

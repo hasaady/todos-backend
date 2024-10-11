@@ -11,14 +11,14 @@
 
   <ItemGroup>
     <None Remove="Infrastrucutre\Migrations\Scripts\Script001-InitialDatabase.sql" />
-    <None Remove="Infrastrucutre\Respositories\SQL\Add_task.sql" />
+    <None Remove="Infrastrucutre\Respositories\SQL\add_todo.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Infrastrucutre\Migrations\Scripts\Script001-InitialDatabase.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Infrastrucutre\Respositories\SQL\add_task.sql">
+    <EmbeddedResource Include="Infrastrucutre\Respositories\SQL\add_todo.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -30,12 +30,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Application\Features\Todo\Commands\DeleteTodo\" />
-    <Folder Include="Application\Features\Todo\Commands\UpdateTodo\" />
-    <Folder Include="Application\Features\Todo\Queries\GetAllTodos\" />
   </ItemGroup>
 
   <ItemGroup>

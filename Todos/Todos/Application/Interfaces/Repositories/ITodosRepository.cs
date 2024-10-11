@@ -4,8 +4,12 @@ namespace Todos.Application.Interfaces.Repositories
 {
     public interface ITodosRepository
     {
-        public Task AddTodoAsync(TodoEntity task);
+       public Task AddTodoAsync(TodoEntity todo);
 
-       //public Task<List<Task>> GetAllAsync();
+       public Task<List<TodoEntity>> GeTodosAsync(int UserId);
+
+       public Task DeletTodoAsync(int Id);
+
+       public Task UpdateTodoAsync(TodoEntity todo);
     }
 }
