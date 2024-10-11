@@ -5,4 +5,4 @@ SELECT [task_id]
       ,[created_at]
       ,[completed_at]
       ,[user_id]
-  FROM [TodosDB].[dbo].[Todos]
+  FROM [TodosDB].[dbo].[Todos] WHERE [user_id] = @userId
