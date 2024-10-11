@@ -44,7 +44,7 @@ namespace Todos.Infrastrucutre.Respositories
             {
                 var query = await _sqlProvider.GetQueryAsync("udpate_todo.sql", GetType());
 
-                await connection.QueryAsync(query, todo)
+                await connection.QueryAsync(query, todo);
             }
         }
 
